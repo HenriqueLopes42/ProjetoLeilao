@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "vendedor")
-public class Vendedor {
+@Table(name = "comprador")
+public class Comprador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer idVendedor;
+    private Integer idComprador;
 
     @Column(name = "nome")
     private String nome;
@@ -27,9 +27,22 @@ public class Vendedor {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "id_leilao")
+    private String idLeilao;
+
     @Column(name = "ativo")
     private Boolean ativo;
 
+
+
+
+    public Integer getIdComprador() {
+        return idComprador;
+    }
+
+    public void setIdComprador(Integer idComprador) {
+        this.idComprador = idComprador;
+    }
 
     public String getNome() {
         return nome;
@@ -37,14 +50,6 @@ public class Vendedor {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Integer getIdVendedor() {
-        return idVendedor;
-    }
-
-    public void setIdVendedor(Integer idVendedor) {
-        this.idVendedor = idVendedor;
     }
 
     public String getCpf() {
@@ -77,6 +82,14 @@ public class Vendedor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getIdLeilao() {
+        return idLeilao;
+    }
+
+    public void setIdLeilao(String idLeilao) {
+        this.idLeilao = idLeilao;
     }
 
     public Boolean getAtivo() {
