@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface RacaRepository extends JpaRepository<Raca, Integer> {
     List<Raca> findByAtivo(Boolean ativo);
+    List<Raca> findByNome(String nome);
 }
