@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Integer> {
-    List<Animal> findbyAtivo(Boolean ativo);
+    List<Animal> findByAtivo (Boolean ativo);
 }
