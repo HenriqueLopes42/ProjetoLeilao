@@ -38,7 +38,7 @@ public class VendedorController {
         return msg;
     }
 
-    @PostMapping
+    @PutMapping
     public Mensagem alterar(@RequestBody Vendedor vendedor) {
         vendedorRepository.save(vendedor);
         vendedorRepository.flush();

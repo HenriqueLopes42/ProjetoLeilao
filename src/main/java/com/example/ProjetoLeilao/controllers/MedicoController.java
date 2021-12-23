@@ -37,7 +37,7 @@ public class MedicoController {
        return msg;
     }
 
-    @PostMapping
+    @PutMapping
     public Mensagem alterar(@RequestBody Medico medico) {
        medicoRepository.save(medico);
        medicoRepository.flush();

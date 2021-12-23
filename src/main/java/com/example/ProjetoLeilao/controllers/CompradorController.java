@@ -24,21 +24,13 @@ public class CompradorController {
         return lista;
     }
 
-    @GetMapping()
+    @GetMapping("/{id}")
     public Comprador buscar (@PathVariable int id ){
 
         Comprador busca = compradorRepository.findById(id).get();
         return busca;
 
     }
-
-  /*  @PostMapping
-    public Comprador incluir (@RequestBody Comprador comprador){
-
-        C
-    }*/
-
-
 
 
 }
