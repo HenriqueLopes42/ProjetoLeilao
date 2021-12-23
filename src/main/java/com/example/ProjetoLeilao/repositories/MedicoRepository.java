@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     List<Medico> findByAtivo(Boolean ativo);
+    List<Medico> findByIdMedico(Integer idMedico);
 }

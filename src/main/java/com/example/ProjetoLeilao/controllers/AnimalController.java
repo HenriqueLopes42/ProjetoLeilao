@@ -2,7 +2,7 @@ package com.example.ProjetoLeilao.controllers;
 
 import com.example.ProjetoLeilao.Mensagem;
 import com.example.ProjetoLeilao.entities.Animal;
-import com.example.ProjetoLeilao.repositories.AnimalRepository;
+import com.example.ProjetoLeilao.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +14,16 @@ public class AnimalController {
 
     @Autowired
     private AnimalRepository animalRepository;
+    @Autowired
+    private MedicoRepository medicoRepository;
+    @Autowired
+    private CompradorRepository compradorRepository;
+    @Autowired
+    private LeilaoRepository leilaoRepository;
+    @Autowired
+    private VendedorRepository vendedorRepository;
+    @Autowired
+    private RacaRepository racaRepository;
 
     @GetMapping()
     public List<Animal> listar(){
