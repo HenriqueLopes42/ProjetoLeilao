@@ -19,7 +19,7 @@ public class Comprador {
     private String cpf;
 
     @Column(name = "data_nascimento")
-    private Date dataNascimento;
+    private String dataNascimento;
 
     @Column(name = "telefone")
     private String telefone;

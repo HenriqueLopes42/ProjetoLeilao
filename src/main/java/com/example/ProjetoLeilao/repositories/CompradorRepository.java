@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface CompradorRepository extends JpaRepository<Comprador, Integer> {
     List<Comprador> findByAtivo (Boolean ativo);
-
+    List<Comprador> findByNome (String Nome);
 }
