@@ -8,7 +8,7 @@ public class Raca {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name="id")
+    @Column (name="id", nullable = false, length = 10)
     private Integer idRaca;
 
     @Column (name="nome")
