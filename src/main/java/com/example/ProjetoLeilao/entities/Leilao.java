@@ -36,4 +36,11 @@ public class Leilao {
     public Boolean getAtivo() { return ativo; }
     public void setAtivo(Boolean ativo) { this.ativo = ativo; }
 
+    public Integer getIdLeilao() {
+        return idLeilao;
+    }
+
+    public void setIdLeilao(Integer idLeilao) {
+        this.idLeilao = idLeilao;
+    }
 }

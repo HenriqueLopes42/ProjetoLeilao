@@ -27,6 +27,9 @@ public class RacaBiz {
    public Boolean isValid(){
         Boolean resultado;
         resultado = validAtivoRaca(this.raca.getAtivo());
+        resultado = racaUnica(this.raca.getNome());
+        resultado = tamanhoDoNomeValido(this.raca.getNome());
+        resultado = tamanhoDescricao(this.raca.getDescricao());
         return resultado;
    }
 
@@ -38,4 +41,40 @@ public class RacaBiz {
             return true;
         }
    }
+
+   public Boolean isValid(Raca r){
+        this.raca = r;
+        return isValid();
+   }
+
+   public Boolean racaUnica(String nome){
+        Integer quantidade = racaRepository.findByNome(nome).size();
+        if(quantidade==0){
+            return true;
+        } else{
+            erros.add("A raça já existe no sistema.");
+            return false;
+        }
+   }
+
+   public Boolean tamanhoDoNomeValido(String nome){
+        Integer tamanho = nome.length();
+        if (tamanho>= 4){
+            return true;
+        }else{
+            erros.add("O nome da raça deve ter 4 ou mais caractéres");
+            return false;
+        }
+   }
+
+   public Boolean tamanhoDescricao(String descricao){
+        Integer tamanho = descricao.length();
+        if (tamanho >= 10){
+            return true;
+        }else{
+            erros.add("A descrição da raça deve ter 10 ou mais caractéres.");
+            return false;
+        }
+   }
+
 }

@@ -11,6 +11,6 @@ public interface VendedorRepository extends JpaRepository<Vendedor, Integer> {
 
     List<Vendedor> findByAtivo(Boolean ativo);
     List<Vendedor> findByIdVendedor(Integer idVendedor);
-
+    List<Vendedor> findByNome(String nome);
 
 }
