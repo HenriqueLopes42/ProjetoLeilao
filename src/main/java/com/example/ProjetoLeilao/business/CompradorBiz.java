@@ -13,7 +13,7 @@ public class CompradorBiz {
 
     LeilaoRepository leilaoRepository;
     CompradorRepository compradorRepository;
-    private Leilao leilao;
+    public Leilao leilao;
     private Comprador comprador;
     private List<String> erros;
 
@@ -31,7 +31,7 @@ public class CompradorBiz {
         resultado = validarData(this.comprador.getDataNascimento()) && resultado;
         resultado = validarTelefone((this.comprador.getTelefone())) && resultado;
         resultado = validarEmail(this.comprador.getEmail()) && resultado;
-        resultado = ativoLeilao (this.leilao.getAtivo() && resultado;
+      /*  resultado = ativoLeilao (this.leilao.getAtivo() && resultado;*/
 
         return resultado;
     }
@@ -41,7 +41,7 @@ public class CompradorBiz {
         return isValid();
     }
 
-    public Boolean ativoLeilao(Boolean a){
+  /*  public Boolean ativoLeilao(Boolean a){
 
         Integer id = leilaoRepository.findByAtivo();
 
@@ -53,7 +53,7 @@ public class CompradorBiz {
             return false;
         }
 
-    }
+    }*/
 
     // validar para que nao tenha um nome repetido
     public Boolean nomeUnico(String nome){
@@ -91,7 +91,7 @@ public class CompradorBiz {
     public Boolean validarData( Date data ){
 
         Date date = new Date();
-        String dateToStr = String.format(("%1$tY-%1$tm-%1$td", date);
+        String dateToStr = String.format(("%1$tY-%1$tm-%1$td"), date);
 
           if (data == null || dateToStr.matches(("\\d{4}-[01]\\d-[0-3]\\d"))) {
             return true;
