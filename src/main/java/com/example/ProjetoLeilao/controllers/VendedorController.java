@@ -1,7 +1,7 @@
 package com.example.ProjetoLeilao.controllers;
 
 import com.example.ProjetoLeilao.Mensagem;
-import com.example.ProjetoLeilao.entities.Medico;
+import com.example.ProjetoLeilao.business.VendedorBiz;
 import com.example.ProjetoLeilao.entities.Vendedor;
 import com.example.ProjetoLeilao.repositories.VendedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class VendedorController {
     @GetMapping()
     public List<Vendedor> listar() {
         List<Vendedor> lista = vendedorRepository.findByAtivo(true);
-        return  lista;
+        return lista;
     }
 
     @GetMapping("{id}")
@@ -30,11 +30,20 @@ public class VendedorController {
 
     @PostMapping
     public Mensagem incluir(@RequestBody Vendedor vendedor) {
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
-        vendedor.setIdVendedor(0);
-        vendedorRepository.save(vendedor);
-        vendedorRepository.flush();
-        msg.setMensagem("Registro inserido.");
+
+        if(vendedorBiz.isValid()) {
+            vendedor.setIdVendedor(0);
+            vendedor.setAtivo(true);
+            vendedorRepository.save(vendedor);
+            vendedorRepository.flush();
+            msg.setMensagem("Registro inserido.");
+        } else {
+            msg.setErros(vendedorBiz.getErros());
+            msg.setMensagem("Erro ao incluir funciario: ");
+        }
+
         return msg;
     }
 

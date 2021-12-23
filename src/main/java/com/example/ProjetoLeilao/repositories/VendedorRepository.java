@@ -10,6 +10,6 @@ import java.util.List;
 public interface VendedorRepository extends JpaRepository<Vendedor, Integer> {
 
     List<Vendedor> findByAtivo(Boolean ativo);
-
+    List<Vendedor> findByNome(String nome);
 
 }
