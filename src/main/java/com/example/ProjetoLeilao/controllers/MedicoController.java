@@ -39,5 +39,34 @@ public class MedicoController {
        return msg;
     }
 
+    @PostMapping
+    public Mensagem alterar(@RequestBody Medico medico) {
+       medicoRepository.save(medico);
+       medicoRepository.flush();
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Registro alterado.");
+        return msg;
+    }
+
+    @DeleteMapping
+    public Mensagem deletar(@RequestBody Medico medico) {
+        Medico excluir = medicoRepository.findById(medico.getIdMedico()).get();
+        excluir.setAtivo(false);
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Registro excluido.");
+        return msg;
+    }
+
+    @DeleteMapping("{id}")
+    public Mensagem deletar(@PathVariable Integer id) {
+        Medico excluir = medicoRepository.findById(id).get();
+        excluir.setAtivo(false);
+        medicoRepository.saveAndFlush(excluir);
+        medicoRepository.flush();
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Registro excluido.");
+        return msg;
+    }
+
 
 }

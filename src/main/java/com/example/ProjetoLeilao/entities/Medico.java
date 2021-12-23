@@ -28,6 +28,9 @@ public class Medico {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "ativo")
+    private Boolean ativo;
+
     public Integer getIdMedico() {
         return idMedico;
     }
@@ -74,5 +77,13 @@ public class Medico {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }
