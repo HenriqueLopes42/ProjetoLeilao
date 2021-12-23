@@ -1,5 +1,6 @@
 package com.example.ProjetoLeilao.controllers;
 
+import com.example.ProjetoLeilao.Mensagem;
 import com.example.ProjetoLeilao.entities.Comprador;
 import com.example.ProjetoLeilao.entities.Medico;
 import com.example.ProjetoLeilao.repositories.CompradorRepository;
@@ -24,20 +25,52 @@ public class CompradorController {
         return lista;
     }
 
-    @GetMapping()
-    public Comprador buscar (@PathVariable int id ){
-
-        Comprador busca = compradorRepository.findById(id).get();
-        return busca;
-
+    @GetMapping("/{id}")
+    public Mensagem buscar(@PathVariable int id) {
+        Comprador comprador = compradorRepository.findById(id).get();
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Registro encontrado");
+        return msg;
     }
 
-  /*  @PostMapping
-    public Comprador incluir (@RequestBody Comprador comprador){
+    @PostMapping
+    public Mensagem incluir(@RequestBody Comprador comprador) {
+        Mensagem msg = new Mensagem();
+        comprador.setIdComprador(0);
+        compradorRepository.save(comprador);
+        compradorRepository.flush();
+        msg.setMensagem("Registro inserido.");
+        return msg;
+    }
 
-        C
-    }*/
+    @PostMapping
+    public Mensagem alterar(@RequestBody Comprador comprador) {
+        compradorRepository.save(comprador);
+        compradorRepository.flush();
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Registro alterado.");
+        return msg;
+    }
 
+    @DeleteMapping
+    public Mensagem deletar(@RequestBody Comprador comprador) {
+        Comprador excluir = compradorRepository.findById(comprador.getIdComprador()).get();
+        excluir.setAtivo(false);
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Registro excluido.");
+        return msg;
+    }
+
+    @DeleteMapping("{id}")
+    public Mensagem deletar(@PathVariable Integer id) {
+        Comprador excluir = compradorRepository.findById(id).get();
+        excluir.setAtivo(false);
+        compradorRepository.saveAndFlush(excluir);
+        compradorRepository.flush();
+        Mensagem msg = new Mensagem();
+        msg.setMensagem("Registro excluido.");
+        return msg;
+    }
 
 
 
