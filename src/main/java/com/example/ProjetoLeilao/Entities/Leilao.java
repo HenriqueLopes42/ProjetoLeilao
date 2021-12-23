@@ -1,4 +1,4 @@
-package com.example.ProjetoLeilao.Entities;
+package com.example.ProjetoLeilao.entities;
 
 import javax.persistence.*;
 import java.util.Date;
