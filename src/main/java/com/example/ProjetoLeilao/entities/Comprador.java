@@ -33,9 +33,6 @@ public class Comprador {
     @Column(name = "ativo")
     private Boolean ativo;
 
-
-
-
     public Integer getIdComprador() {
         return idComprador;
     }

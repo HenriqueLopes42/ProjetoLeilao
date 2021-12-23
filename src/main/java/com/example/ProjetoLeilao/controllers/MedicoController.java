@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("Medico")
+@RequestMapping("medico")
 public class MedicoController {
 
    @Autowired
@@ -22,11 +22,9 @@ public class MedicoController {
     }
 
     @GetMapping("/{id}")
-    public Mensagem buscar(@PathVariable int id) {
+    public Medico buscar(@PathVariable int id) {
        Medico medico = medicoRepository.findById(id).get();
-       Mensagem msg = new Mensagem();
-       msg.setMensagem("Registro encontrado");
-       return msg;
+       return medico;
     }
 
     @PostMapping
