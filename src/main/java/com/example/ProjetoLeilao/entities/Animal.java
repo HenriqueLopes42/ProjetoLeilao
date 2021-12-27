@@ -12,6 +12,9 @@ public class Animal {
     @Column(name = "id")
     private Integer idAnimal;
 
+    @Column(name = "nome")
+    private String nome;
+
     @Column(name = "registro")
     private String registro;
 
@@ -130,4 +133,8 @@ public class Animal {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
+
+    public String getNome() { return nome;}
+
+    public void setNome(String nome) {this.nome = nome; }
 }

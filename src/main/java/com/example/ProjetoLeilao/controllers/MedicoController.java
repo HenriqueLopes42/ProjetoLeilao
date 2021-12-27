@@ -31,6 +31,7 @@ public class MedicoController {
     public Mensagem incluir(@RequestBody Medico medico) {
        Mensagem msg = new Mensagem();
        medico.setIdMedico(0);
+       medico.setAtivo(true);
        medicoRepository.save(medico);
        medicoRepository.flush();
        msg.setMensagem("Registro inserido.");
