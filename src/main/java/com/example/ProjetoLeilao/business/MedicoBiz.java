@@ -7,16 +7,13 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class MedicoBiz {
     MedicoRepository medicoRepository;
     private Medico medico;
-    private List<String> erros;
+    private ArrayList<String> erros;
 
-
-
-    public MedicoBiz(MedicoRepository medicoRepository, Medico medico) {
+    public MedicoBiz(Medico medico, MedicoRepository medicoRepository) {
         this.medicoRepository = medicoRepository;
         this.medico = medico;
         this.erros = new ArrayList<>();
@@ -38,11 +35,11 @@ public class MedicoBiz {
         this.medico = medico;
     }
 
-    public List<String> getErros() {
+    public ArrayList<String> getErros() {
         return erros;
     }
 
-    public void setErros(List<String> erros) {
+    public void setErros(ArrayList<String> erros) {
         this.erros = erros;
     }
 
@@ -71,7 +68,7 @@ public class MedicoBiz {
 
     public Boolean tamanhoNomeValido( String nome){
         Integer tamanho = nome.length();
-        if (tamanho >= 10 ){
+        if (tamanho >= 10 && tamanho <= 50){
             return true;
         } else {
             erros.add("O tamanho do nome deve ter pelo menos 10 caracteres");
@@ -81,7 +78,7 @@ public class MedicoBiz {
 
     public Boolean nomeIniciaMaiuscula( String nome ){
 
-        Boolean certo = nome.matches("^[A-Z]]");
+        Boolean certo = nome.matches("^[A-Z]");
         if (!certo){
             erros.add("O nome deve iniciar com letra maiuscula");
         }

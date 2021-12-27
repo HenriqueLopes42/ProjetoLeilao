@@ -49,10 +49,17 @@ public class VendedorController {
 
     @PutMapping
     public Mensagem alterar(@RequestBody Vendedor vendedor) {
-        vendedorRepository.save(vendedor);
-        vendedorRepository.flush();
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Registro alterado.");
+        if (vendedorBiz.isValid()) {
+            vendedorRepository.save(vendedor);
+            vendedorRepository.flush();
+            msg.setMensagem("Registro alterado.");
+        } else {
+            msg.setMensagem("Erro ao alterar o vendedor");
+            msg.setErros(vendedorBiz.getErros());
+        }
+
         return msg;
     }
 

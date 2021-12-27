@@ -1,6 +1,7 @@
 package com.example.ProjetoLeilao.controllers;
 
 import com.example.ProjetoLeilao.Mensagem;
+import com.example.ProjetoLeilao.business.MedicoBiz;
 import com.example.ProjetoLeilao.entities.Medico;
 import com.example.ProjetoLeilao.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +30,34 @@ public class MedicoController {
 
     @PostMapping
     public Mensagem incluir(@RequestBody Medico medico) {
+       MedicoBiz medicoBiz = new MedicoBiz(medico, medicoRepository);
        Mensagem msg = new Mensagem();
-       medico.setIdMedico(0);
-       medico.setAtivo(true);
-       medicoRepository.save(medico);
-       medicoRepository.flush();
-       msg.setMensagem("Registro inserido.");
+       if (medicoBiz.isValid()) {
+           medico.setIdMedico(0);
+           medico.setAtivo(true);
+           medicoRepository.save(medico);
+           medicoRepository.flush();
+           msg.setMensagem("Medico inserido.");
+       } else {
+           msg.setMensagem("Erro ao inicializar medico");
+           msg.setErros(medicoBiz.getErros());
+       }
        return msg;
     }
 
     @PutMapping
     public Mensagem alterar(@RequestBody Medico medico) {
-       medicoRepository.save(medico);
-       medicoRepository.flush();
-        Mensagem msg = new Mensagem();
-        msg.setMensagem("Registro alterado.");
+       MedicoBiz medicoBiz = new MedicoBiz(medico, medicoRepository);
+       Mensagem msg = new Mensagem();
+       if (medicoBiz.isValid()) {
+           medicoRepository.save(medico);
+           medicoRepository.flush();
+           msg.setMensagem("Registro alterado.");
+       } else {
+            msg.setMensagem("Problema ao alterar o medico");
+            msg.setErros(medicoBiz.getErros());
+       }
+
         return msg;
     }
 
