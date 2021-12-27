@@ -31,7 +31,7 @@ public class CompradorBiz {
         resultado = validarData(this.comprador.getDataNascimento()) && resultado;
         resultado = validarTelefone((this.comprador.getTelefone())) && resultado;
         resultado = validarEmail(this.comprador.getEmail()) && resultado;
-      /*  resultado = ativoLeilao (this.leilao.getAtivo() && resultado;*/
+        resultado = validAtivoLeilao(this.leilao.getAtivo()) && resultado;
 
         return resultado;
     }
@@ -41,19 +41,14 @@ public class CompradorBiz {
         return isValid();
     }
 
-  /*  public Boolean ativoLeilao(Boolean a){
-
-        Integer id = leilaoRepository.findByAtivo();
-
-        if (id > 0 ){
-
-            return true;
-        }else {
-            erros.add("o id do leilao deve existir.")
+    public Boolean validAtivoLeilao(Boolean ativo){
+        if (!ativo){
+            erros.add("O leilao deve estar ativo");
             return false;
+        }else {
+            return true;
         }
-
-    }*/
+    }
 
     // validar para que nao tenha um nome repetido
     public Boolean nomeUnico(String nome){
