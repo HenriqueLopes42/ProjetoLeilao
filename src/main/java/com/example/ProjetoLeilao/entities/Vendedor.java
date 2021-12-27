@@ -10,29 +10,32 @@ public class Vendedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    @Pattern(regexp = "[0-9]{10}", message = "O código deve ser inteiro")
+    @Column(name = "id", nullable = false, length = 10 )
+    @Pattern(regexp = "^[0-9]{10}$", message = "O código deve ser inteiro")
     private Integer idVendedor;
 
-    @Column(name = "nome")
-    @Pattern(regexp = "[A-z]{10,50}", message = "O nome deve ter entre 10 e 50 caracteres")
+    @Column(name = "nome", nullable = false, length = 50)
+    @Pattern(regexp = "^[A-Z][a-z]{9,49}$", message = "O nome deve ter entre 10 e 50 caracteres")
     private String nome;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf", nullable = false, length = 11)
+    @Pattern(regexp = "^[0-9]{3}(\\.\\d*[0-9]{3})(\\.\\d*[0-9]{3})-[0-9]{2}$", message = "CPF inválido")
     private String cpf;
 
-    @Column(name = "data_nascimento")
+    @Column(name = "data_nascimento", nullable = false)
+    @Pattern(regexp = "^[0-3][0-9]/[0-1][0-9]/[0-9]{2}$", message = "Data de nascimento inválida")
     private Date dataNascimento;
 
-    @Column(name = "telefone")
+    @Column(name = "telefone", nullable = false, length = 11)
+    @Pattern(regexp = "^\\([0-9]{2}\\)[0-9]{5}-[0-9]{4}$", message = "Numero de telefone invalido.")
     private String telefone;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 100)
+    @Pattern(regexp = "^[A-z0-9_]{1,20}@[A-z]{1,15}\\.([A-z]{1,10}|[A-z]{1,10}\\.[A-z]{1,5})$", message = "Email invalido.")
     private String email;
 
-    @Column(name = "ativo")
+    @Column(name = "ativo", nullable = false, length = 1)
     private Boolean ativo;
-
 
     public String getNome() {
         return nome;
