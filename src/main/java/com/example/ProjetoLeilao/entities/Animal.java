@@ -2,6 +2,7 @@ package com.example.ProjetoLeilao.entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "animal")
@@ -10,36 +11,47 @@ public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Integer idAnimal;
 
     @Column(name = "nome")
+    @Pattern(regexp = "^[A-Za-z\s]{10,50}$", message = "O nome precisa ter entre 10 a 50 caracteres.")
     private String nome;
 
     @Column(name = "registro")
+    @Pattern(regexp = "^([A-Z]{3}[0-9]{4})$", message = "o registro precisa ser valido.")
     private String registro;
 
     @Column(name = "preco")
+    @Pattern(regexp = "^\\d*[0-9](\\.\\d*[0-9])?$", message = "Esse codigo precisa ser um numero inteiro.")
     private Float preco;
 
     @Column(name = "id_raca")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Integer idRaca;
 
     @Column(name = "id_vendedor")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Integer idVendedor;
 
     @Column(name = "id_comprador")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Integer idComprador;
 
     @Column(name = "id_medico")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Integer idMedico;
 
     @Column(name = "peso_arroba")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Float pesoArroba;
 
     @Column(name = "idade")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Integer idade;
 
     @Column(name = "id_leilao")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Integer idLeilao;
 
     @Column(name = "ativo")
