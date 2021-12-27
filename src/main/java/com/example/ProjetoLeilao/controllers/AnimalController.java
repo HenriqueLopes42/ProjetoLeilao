@@ -1,6 +1,7 @@
 package com.example.ProjetoLeilao.controllers;
 
 import com.example.ProjetoLeilao.Mensagem;
+import com.example.ProjetoLeilao.business.AnimalBiz;
 import com.example.ProjetoLeilao.entities.Animal;
 import com.example.ProjetoLeilao.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +44,25 @@ public class AnimalController {
         Mensagem msg = new Mensagem();
 
 
-        animal.setIdAnimal(0);
-        animalRepository.save(animal);
-        animalRepository.flush();
-        msg.setMensagem("Animal incluido com sucesso");
+        AnimalBiz animalBiz = new AnimalBiz(animal,
+                                animalRepository,
+                                medicoRepository,
+                                compradorRepository,
+                                leilaoRepository,
+                                vendedorRepository,
+                                racaRepository);
+
+
+        if (animalBiz.isValid()) {
+            animal.setIdAnimal(0);
+            animalRepository.save(animal);
+            animalRepository.flush();
+            msg.setMensagem("Animal incluido com sucesso");
+        } else {
+            msg.setErros(animalBiz.getErros());
+            msg.setMensagem("Erro ao incluir animal: ");
+        }
+
 
         return msg;
 
@@ -56,9 +72,19 @@ public class AnimalController {
     public Mensagem alterar(@RequestBody Animal animal){
         Mensagem msg = new Mensagem();
 
-        animalRepository.save(animal);
-        animalRepository.flush();
-        msg.setMensagem("Animal alterado com sucesso");
+
+        AnimalBiz animalBiz = new AnimalBiz(animal,animalRepository, medicoRepository, compradorRepository, leilaoRepository, vendedorRepository,racaRepository);
+
+
+        if (animalBiz.isValid()) {
+            animalRepository.save(animal);
+            animalRepository.flush();
+            msg.setMensagem("Animal alterado com sucesso");
+        } else {
+            msg.setErros(animalBiz.getErros());
+            msg.setMensagem("Erro ao alterar animal: ");
+        }
+
 
         return msg;
 

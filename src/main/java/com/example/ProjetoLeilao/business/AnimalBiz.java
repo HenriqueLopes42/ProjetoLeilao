@@ -3,13 +3,13 @@ package com.example.ProjetoLeilao.business;
 import com.example.ProjetoLeilao.entities.*;
 import com.example.ProjetoLeilao.repositories.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class AnimalBiz {
 
     private AnimalRepository animalRepository;
     private Animal animal;
-    private ArrayList<String> erros;
+    private List<String> erros;
 
     private MedicoRepository medicoRepository;
     private CompradorRepository compradorRepository;
@@ -18,8 +18,8 @@ public class AnimalBiz {
     private RacaRepository racaRepository;
 
 
-    public AnimalBiz(AnimalRepository animalRepository,
-                     Animal animal,
+    public AnimalBiz(Animal animal,
+                     AnimalRepository animalRepository,
                      MedicoRepository medicoRepository,
                      CompradorRepository compradorRepository,
                      LeilaoRepository leilaoRepository,
@@ -60,6 +60,8 @@ public class AnimalBiz {
         resultado = racaExistente(animal.getIdRaca()) && resultado;
         resultado = racaAtivo(animal.getIdRaca()) && resultado;
 
+        resultado = verificarIdade(animal.getIdade()) && resultado;
+        resultado = PesoValido(animal.getPesoArroba()) && resultado;
 
 
 
@@ -91,7 +93,7 @@ public class AnimalBiz {
         if(preco >= 100 && preco <= 100000){
             return true;
         }else{
-            erros.add("O preço deve ser mais que 100 e menor que 100000");
+            erros.add("O preço deve ser mais que 100 e menor que 100.000");
             return false;
         }
 
@@ -205,29 +207,30 @@ public class AnimalBiz {
         if(raca.getAtivo()){
             return true;
         }else{
-            erros.add("O Raça não esta ativo.");
+            erros.add("A raca escolhida nao esta ativa.");
             return false;
         }
     }
 
-    public Boolean verificaridade(Integer idade){
+    public Boolean verificarIdade(Integer idade){
         if(idade >= 2 && idade <=7 ){
             return true;
         }else{
-            erros.add("idade Invalida");
+            erros.add("A idade deve ser maior que 2 anos e menor que 7 anos.");
             return false;
         }
     }
 
+    public Boolean PesoValido(Float peso){
+        if(peso >= 100 && peso <= 600 ){
+            return true;
+        }else{
+            erros.add("O peso deve estar entre 100 e 600.");
+            return false;
+        }
+    }
 
-
-
-
-
-
-
-
-    public ArrayList<String> getErros() {
+    public List<String> getErros() {
         return erros;
     }
 
