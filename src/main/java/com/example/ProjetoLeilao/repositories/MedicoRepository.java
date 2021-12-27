@@ -11,4 +11,5 @@ import java.util.List;
 public interface MedicoRepository extends JpaRepository<Medico, Integer> {
     List<Medico> findByAtivo(Boolean ativo);
     List<Medico> findByIdMedico(Integer idMedico);
+    List<Medico> findByNome(String nome);
 }

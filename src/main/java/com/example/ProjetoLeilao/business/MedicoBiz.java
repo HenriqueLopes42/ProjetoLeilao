@@ -1,31 +1,41 @@
 package com.example.ProjetoLeilao.business;
 
-import com.example.ProjetoLeilao.entities.Vendedor;
-import com.example.ProjetoLeilao.repositories.VendedorRepository;
+import com.example.ProjetoLeilao.entities.Medico;
+import com.example.ProjetoLeilao.repositories.MedicoRepository;
+
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class VendedorBiz {
-
-    VendedorRepository vendedorRepository;
-    private Vendedor vendedor;
+public class MedicoBiz {
+    MedicoRepository medicoRepository;
+    private Medico medico;
     private List<String> erros;
 
-    public VendedorBiz(Vendedor vendedor, VendedorRepository vendedorRepository) {
-        this.vendedorRepository = vendedorRepository;
-        this.vendedor = vendedor;
+
+
+    public MedicoBiz(MedicoRepository medicoRepository, Medico medico) {
+        this.medicoRepository = medicoRepository;
+        this.medico = medico;
         this.erros = new ArrayList<>();
     }
 
-    public Vendedor getVendedor() {
-        return vendedor;
+    public MedicoRepository getMedicoRepository() {
+        return medicoRepository;
     }
 
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
+    public void setMedicoRepository(MedicoRepository medicoRepository) {
+        this.medicoRepository = medicoRepository;
+    }
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 
     public List<String> getErros() {
@@ -38,18 +48,19 @@ public class VendedorBiz {
 
     public Boolean isValid() {
         Boolean resultado;
-        resultado = nomeUnico(vendedor.getNome());
-        resultado = tamanhoNomeValido(vendedor.getNome()) && resultado;
-        resultado = nomeIniciaMaiuscula(vendedor.getNome()) && resultado;
-        resultado = validaDataNascimento(vendedor.getDataNascimento()) && resultado;
-        resultado = validaTelefone(vendedor.getTelefone()) && resultado;
-        resultado = validaEmail(vendedor.getEmail()) && resultado;
+        resultado = nomeUnico(medico.getNome());
+        resultado = tamanhoNomeValido(medico.getNome()) && resultado;
+        resultado = nomeIniciaMaiuscula(medico.getNome()) && resultado;
+        resultado = validaDataNascimento(medico.getDataNascimento()) && resultado;
+        resultado = validaTelefone(medico.getTelefone()) && resultado;
+        resultado = validaEmail(medico.getEmail()) && resultado;
+        resultado = validaCrmv(medico.getCrmv()) && resultado;
         return resultado;
     }
 
     public Boolean nomeUnico(String nome){
 
-        Integer quantidade = vendedorRepository.findByNome(nome).size();
+        Integer quantidade = medicoRepository.findByNome(nome).size();
         if (quantidade == 0) {
             return true;
         } else {
@@ -99,5 +110,11 @@ public class VendedorBiz {
         if (!certo)
             erros.add("O endereco de email não segue o padrão");
         return certo;
+    }
+
+    public Boolean validaCrmv(Integer crmv) {
+        if (crmv > 0)
+            return true;
+        return false;
     }
 }
