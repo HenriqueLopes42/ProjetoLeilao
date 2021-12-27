@@ -1,6 +1,8 @@
 package com.example.ProjetoLeilao.controllers;
 
 import com.example.ProjetoLeilao.Mensagem;
+import com.example.ProjetoLeilao.business.CompradorBiz;
+import com.example.ProjetoLeilao.business.VendedorBiz;
 import com.example.ProjetoLeilao.entities.Comprador;
 import com.example.ProjetoLeilao.entities.Medico;
 import com.example.ProjetoLeilao.repositories.CompradorRepository;
@@ -35,7 +37,20 @@ public class CompradorController {
 
     @PostMapping
     public Mensagem incluir(@RequestBody Comprador comprador) {
+        CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
+
         Mensagem msg = new Mensagem();
+        if(compradorBiz.isValid()) {
+            comprador.setIdComprador(0);
+            comprador.setAtivo(true);
+            compradorRepository.save(comprador);
+            compradorRepository.flush();
+            msg.setMensagem("Registro inserido.");
+        } else {
+            msg.setErros(compradorBiz.getErros());
+            msg.setMensagem("Erro ao incluir Comprador: ");
+        }
+
         comprador.setIdComprador(0);
         comprador.setAtivo(true);
         compradorRepository.save(comprador);
@@ -46,11 +61,20 @@ public class CompradorController {
 
     @PutMapping
     public Mensagem alterar(@RequestBody Comprador comprador) {
-        compradorRepository.save(comprador);
-        compradorRepository.flush();
+        CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Registro alterado.");
-        return msg;
+
+        if(compradorBiz.isValid()) {
+            comprador.setIdComprador(0);
+            comprador.setAtivo(true);
+            compradorRepository.save(comprador);
+            compradorRepository.flush();
+            msg.setMensagem("Registro Alterado.");
+        } else {
+            msg.setErros(compradorBiz.getErros());
+            msg.setMensagem("Erro ao Alterar Comprador: ");
+        }
+                return msg;
     }
 
     @DeleteMapping
