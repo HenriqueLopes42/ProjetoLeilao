@@ -1,6 +1,7 @@
 package com.example.ProjetoLeilao.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
@@ -10,9 +11,11 @@ public class Vendedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @Pattern(regexp = "[0-9]{10}", message = "O código deve ser inteiro")
     private Integer idVendedor;
 
     @Column(name = "nome")
+    @Pattern(regexp = "[A-z]{10,50}", message = "O nome deve ter entre 10 e 50 caracteres")
     private String nome;
 
     @Column(name = "cpf")
