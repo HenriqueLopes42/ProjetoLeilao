@@ -2,6 +2,7 @@ package com.example.ProjetoLeilao.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "comprador")
@@ -10,6 +11,7 @@ public class Comprador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Esse codigo precisa ser um numero inteiro.")
     private Integer idComprador;
 
     @Column(name = "nome")
