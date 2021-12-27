@@ -11,10 +11,13 @@ public class LeilaoBiz {
     private Leilao leilao;
     private List<String> erros;
 
-    /*public Boolean isValid(){
-        Boolean resultado;
-        return resultado;
-    }*/
+    public List<String> getErros() {
+        return erros;
+    }
+
+    public void setErros(List<String> erros) {
+        this.erros = erros;
+    }
 
     public LeilaoBiz(Leilao l, LeilaoRepository leilaoRepository){
         erros = new ArrayList<>();
@@ -22,11 +25,22 @@ public class LeilaoBiz {
         this.leilaoRepository = leilaoRepository;
     }
 
-    /*public Boolean isValid(Leilao l){
-        this.leilao = l;
-        return isValid();
-    }*/
 
+    public Boolean isValid() {
+        Boolean resultado;
+        resultado = nomeEventoUnico(this.leilao.getNome());
+        return resultado;
+    }
+
+    public Boolean nomeEventoUnico (String nome){ // procura para ver se nao existe outro evento já registrado com o mesmo nome
+        Integer quantidade = leilaoRepository.findByNome(nome).size();
+        if(quantidade == 0 ){
+            return true;
+        } else {
+            erros.add("O Nome do Evento Leilão já existe no sistema.");
+            return false;
+        }
+    }
 
 
 

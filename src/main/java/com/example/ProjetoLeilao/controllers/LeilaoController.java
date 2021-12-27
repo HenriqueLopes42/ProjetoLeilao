@@ -2,6 +2,7 @@ package com.example.ProjetoLeilao.controllers;
 
 
 import com.example.ProjetoLeilao.Mensagem;
+import com.example.ProjetoLeilao.business.LeilaoBiz;
 import com.example.ProjetoLeilao.entities.Leilao;
 import com.example.ProjetoLeilao.repositories.LeilaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 @RequestMapping("leilao")
 public class LeilaoController {
 
@@ -29,12 +31,18 @@ public class LeilaoController {
 
     @PostMapping
     public Mensagem incluir (@RequestBody Leilao leilao){
-        leilao.setIdLeilao(0);
-        leilaoRepository.save(leilao);
-        leilaoRepository.flush();
-
+        LeilaoBiz leilaoBiz = new LeilaoBiz(leilao, leilaoRepository);
         Mensagem msg = new Mensagem();
-        msg.setMensagem("Leilão inserido com sucesso");
+
+        if(leilaoBiz.isValid()){
+            leilao.setIdLeilao(0);
+            leilaoRepository.save(leilao);
+            leilaoRepository.flush();
+            msg.setMensagem("Leilão Incluido com sucesso!");
+        } else{
+            msg.setErros(leilaoBiz.getErros());
+
+        }
         return msg;
     }
 

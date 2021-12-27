@@ -11,4 +11,6 @@ public interface LeilaoRepository  extends JpaRepository<Leilao, Integer> {
     List<Leilao> findByAtivo(Boolean ativo);
 
     List<Leilao> findByIdLeilao(Integer idLeilao);
+
+    List<Leilao> findByNome(String nome);
 }

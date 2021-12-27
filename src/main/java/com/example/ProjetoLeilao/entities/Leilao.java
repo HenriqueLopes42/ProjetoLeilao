@@ -1,6 +1,7 @@
 package com.example.ProjetoLeilao.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
@@ -9,16 +10,20 @@ public class Leilao {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @Column (name = "id", nullable = true, length = 10)
+    @Pattern(regexp = "^[0-9]{1,100}$", message = "o codigo do leilão precisa ser de 1 a 100")
     private Integer idLeilao;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false, length = 50)
+    @Pattern(regexp = "^[A-Za-z-0-9\s]{10,50}$", message = "O nome do Evento de Leilão deve ter entre 10 e 50 caracteres")
     private String nome;
 
-    @Column(name = "descricao")
+    @Column(name = "descricao", nullable = false, length = 100)
+    @Pattern(regexp = "^[A-Za-z-0-9\s]{10,100}$", message = "A Descrição do Evento leilão deve ter entre 10 e 100 caracteres")
     private String descricao;
 
-    @Column(name = "data")
+    @Column(name = "data", nullable = false, length = 10)
+    @Pattern(regexp = "^[0-3][0-9]/[0-1][0-9]/[0-9]{4}$", message = "Data incorreta")
     private Date data;
 
     @Column(name = "ativo")
@@ -39,7 +44,6 @@ public class Leilao {
     public Integer getIdLeilao() {
         return idLeilao;
     }
-
     public void setIdLeilao(Integer idLeilao) {
         this.idLeilao = idLeilao;
     }
