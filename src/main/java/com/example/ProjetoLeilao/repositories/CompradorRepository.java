@@ -13,4 +13,5 @@ public interface CompradorRepository extends JpaRepository<Comprador, Integer> {
 
     List<Comprador> findByIdComprador(Integer idComprador);
 
+    List<Comprador> findByNome(String Nome);
 }
