@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("leilao")
+@RestController
 public class LeilaoController {
 
     @Autowired
