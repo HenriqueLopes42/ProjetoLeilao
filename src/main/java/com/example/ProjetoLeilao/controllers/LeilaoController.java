@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("leilao")
-@RestController
 public class LeilaoController {
 
     @Autowired
