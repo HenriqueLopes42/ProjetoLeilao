@@ -98,7 +98,7 @@ public class CompradorBiz {
     }
     public Boolean validarTelefone( String tel) {
 
-        if (tel == null || !tel.matches("^\\(?\\d{2}\\)?[\\s-]?\\d{4}-?\\d{4}$")) {
+        if (tel == null || !tel.matches("^\\(\\d{2}\\)\\s[0-9]{5}-[0-9]{4}$\n")) {
             return true;
         } else {
             erros.add("Telefone invalido");
@@ -108,7 +108,7 @@ public class CompradorBiz {
 
     public Boolean validarEmail ( String email) {
 
-        if (email == null || email.matches("^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$()")) {
+        if (email == null || email.matches("^([0-9A-Za-z]+)(@{1})([A-Za-z]+)(.)([A-Za-z]{2,3})$")) {
             return true;
 
         } else {
