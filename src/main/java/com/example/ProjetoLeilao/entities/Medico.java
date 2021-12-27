@@ -1,7 +1,7 @@
 package com.example.ProjetoLeilao.entities;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
@@ -10,25 +10,31 @@ public class Medico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false, length = 10)
+    @Pattern(regexp = "^[0-9]+", message = "O codigo precisa ter ao menos um caractere")
     private Integer idMedico;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false, length = 50)
+    @Pattern(regexp = "^[A-Za-z\s]{10,50}$", message = "O nome precisa ter entre 10 a 50 caracteres.")
     private String nome;
 
-    @Column(name = "crmv")
+    @Column(name = "crmv", nullable = false, length = 10)
+    @Pattern(regexp = "^[0-9]+", message = "CRMV precisa deve ser maior que 0")
     private Integer crmv;
 
-    @Column(name = "data_nascimento")
+    @Column(name = "data_nascimento", nullable = false, length = 10)
+    @Pattern(regexp = "^[0-2][0-9]{3}/[0-1][0-9]/[0-3][0-9]", message = "Data de nascimento inválida")
     private Date dataNascimento;
 
-    @Column(name = "telefone")
+    @Column(name = "telefone", nullable = false,  length = 16)
+    @Pattern(regexp = "^\\([0-9]{2}\\)[0-9]{5}-[0-9]{4}$", message = "Numero de telefone invalido.")
     private String telefone;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 100)
+    @Pattern(regexp = "^([0-9A-Za-z]+)(@{1})([A-Za-z]+)(\\.)([A-Za-z]{2,3})$ ", message = "Email invalido.")
     private String email;
 
-    @Column(name = "ativo")
+    @Column(name = "ativo", nullable = false, length = 1)
     private Boolean ativo;
 
     public Integer getIdMedico() {
