@@ -62,7 +62,7 @@ public class RacaBiz {
         if (tamanho>= 4){
             return true;
         }else{
-            erros.add("O nome da raça deve ter 4 ou mais caractéres");
+            erros.add("O nome da raça deve ter 4 ou mais caractéres.");
             return false;
         }
    }

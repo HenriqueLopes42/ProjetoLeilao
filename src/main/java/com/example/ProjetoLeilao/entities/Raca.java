@@ -1,6 +1,7 @@
 package com.example.ProjetoLeilao.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="raca")
@@ -8,13 +9,15 @@ public class Raca {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name="id", nullable = false, length = 10)
+    @Column (name="id")
     private Integer idRaca;
 
-    @Column (name="nome")
+    @Column (name="nome", nullable = false, length = 50)
+    @Pattern(regexp = "^[A-Za-z\s]{4,50}$", message = "O nome da raça deve ter 4 ou mais caractéres.")
     private String nome;
 
-    @Column (name="descricao")
+    @Column (name="descricao", nullable = false, length = 100)
+    @Pattern(regexp = "^[A-Za-z\s]{10,100}$", message = "A descrição da raça deve ter 10 ou mais caractéres.")
     private String descricao;
 
     @Column (name="ativo")
