@@ -19,7 +19,7 @@ public class Leilao {
     private String nome;
 
     @Column(name = "descricao", nullable = false, length = 100)
-    @Pattern(regexp = "^[A-z0-9]{20, 100}$", message = "A descricao deve ter uim minimo de 20 caracteres e um maximo de 100.")
+    @Pattern(regexp = "^[A-z0-9]{20,100}$", message = "A descricao deve ter uim minimo de 20 caracteres e um maximo de 100.")
     private String descricao;
 
     @Column(name = "data", nullable = false)
