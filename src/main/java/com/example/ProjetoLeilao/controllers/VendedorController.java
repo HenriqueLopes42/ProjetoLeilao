@@ -59,7 +59,6 @@ public class VendedorController {
             msg.setMensagem("Erro ao alterar o vendedor");
             msg.setErros(vendedorBiz.getErros());
         }
-
         return msg;
     }
 
