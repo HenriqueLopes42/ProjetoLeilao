@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("raca")
+@CrossOrigin
 public class RacaController {
     @Autowired
     private RacaRepository racaRepository;

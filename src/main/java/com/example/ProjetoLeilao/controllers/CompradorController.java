@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping ("comprador")
+@CrossOrigin
 
 public class CompradorController {
 
