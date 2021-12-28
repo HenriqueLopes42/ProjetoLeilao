@@ -2,9 +2,7 @@ package com.example.ProjetoLeilao.controllers;
 
 import com.example.ProjetoLeilao.Mensagem;
 import com.example.ProjetoLeilao.business.CompradorBiz;
-import com.example.ProjetoLeilao.business.VendedorBiz;
 import com.example.ProjetoLeilao.entities.Comprador;
-import com.example.ProjetoLeilao.entities.Medico;
 import com.example.ProjetoLeilao.repositories.CompradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

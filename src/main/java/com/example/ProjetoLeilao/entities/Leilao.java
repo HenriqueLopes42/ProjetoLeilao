@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Entity
 @Table(name="leilao")
-@CrossOrigin
 public class Leilao {
 
     @Id

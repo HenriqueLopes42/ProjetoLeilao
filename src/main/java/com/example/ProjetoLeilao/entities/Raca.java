@@ -7,7 +7,6 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="raca")
-@CrossOrigin
 public class Raca {
 
     @Id
