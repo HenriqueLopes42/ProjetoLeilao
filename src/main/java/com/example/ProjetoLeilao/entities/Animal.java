@@ -1,6 +1,8 @@
 package com.example.ProjetoLeilao.entities;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
