@@ -12,13 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping ("comprador")
 @CrossOrigin
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 22c17498cadafcadd63333b6039324312ee7a0c9
 
-=======
->>>>>>> 90f24612c73804d011d3fe461d2cfc9770f35010
+
+
+
 public class CompradorController {
 
     @Autowired
@@ -70,6 +67,7 @@ public class CompradorController {
         Mensagem msg = new Mensagem();
 
         if(compradorBiz.isValid()) {
+            comprador.setIdComprador(0);
             comprador.setAtivo(true);
             compradorRepository.save(comprador);
             compradorRepository.flush();
