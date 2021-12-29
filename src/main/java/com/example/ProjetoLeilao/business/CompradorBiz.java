@@ -31,7 +31,7 @@ public class CompradorBiz {
         resultado = validarData(this.comprador.getDataNascimento()) && resultado;
         resultado = validarTelefone((this.comprador.getTelefone())) && resultado;
         resultado = validarEmail(this.comprador.getEmail()) && resultado;
-        resultado = validAtivoLeilao(this.leilao.getAtivo()) && resultado;
+        resultado = validAtivo(this.comprador.getAtivo()) && resultado;
 
         return resultado;
     }
@@ -41,7 +41,7 @@ public class CompradorBiz {
         return isValid();
     }
 
-    public Boolean validAtivoLeilao(Boolean ativo){
+    public Boolean validAtivo(Boolean ativo){
         if (!ativo){
             erros.add("O leilao deve estar ativo");
             return false;
