@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping ("comprador")
+@CrossOrigin
 
 public class CompradorController {
 
@@ -65,7 +66,6 @@ public class CompradorController {
         Mensagem msg = new Mensagem();
 
         if(compradorBiz.isValid()) {
-            comprador.setIdComprador(0);
             comprador.setAtivo(true);
             compradorRepository.save(comprador);
             compradorRepository.flush();

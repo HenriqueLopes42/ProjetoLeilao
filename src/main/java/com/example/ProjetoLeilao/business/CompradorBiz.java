@@ -29,9 +29,9 @@ public class CompradorBiz {
         resultado =  tamanhoDoNomeValido(this.comprador.getNome()) && resultado;
         resultado = nomeIniciaMaiuscula(this.comprador.getNome()) && resultado;
         resultado = validarData(this.comprador.getDataNascimento()) && resultado;
-        resultado = validarTelefone((this.comprador.getTelefone())) && resultado;
+        resultado = validarTelefone(this.comprador.getTelefone()) && resultado;
         resultado = validarEmail(this.comprador.getEmail()) && resultado;
-        resultado = validAtivoLeilao(this.leilao.getAtivo()) && resultado;
+        resultado = validAtivoLeilao(this.comprador.getAtivo()) && resultado;
 
         return resultado;
     }
