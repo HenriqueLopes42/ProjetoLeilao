@@ -16,6 +16,8 @@ import java.util.List;
 
 
 
+
+
 public class CompradorController {
 
     @Autowired
@@ -66,17 +68,12 @@ public class CompradorController {
         CompradorBiz compradorBiz = new CompradorBiz(comprador, compradorRepository);
         Mensagem msg = new Mensagem();
 
-        if(compradorBiz.isValid()) {
-            comprador.setIdComprador(0);
-            comprador.setAtivo(true);
-            compradorRepository.save(comprador);
-            compradorRepository.flush();
-            msg.setMensagem("Registro Alterado.");
-        } else {
-            msg.setErros(compradorBiz.getErros());
-            msg.setMensagem("Erro ao Alterar Comprador: ");
-        }
-                return msg;
+        comprador.setAtivo(true);
+        compradorRepository.save(comprador);
+        compradorRepository.flush();
+        msg.setMensagem("Registro Alterado.");
+        return msg;
+
     }
 
     @DeleteMapping
