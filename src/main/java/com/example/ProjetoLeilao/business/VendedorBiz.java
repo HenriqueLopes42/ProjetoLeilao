@@ -78,7 +78,7 @@ public class VendedorBiz {
     }
 
 
-    //Conversao de data para string??
+    //Validar datas passadas
     public Boolean validaDataNascimento(Date data) {
         Format formatter = new SimpleDateFormat("yyyy-MM-dd");
         String s = formatter.format(data);
