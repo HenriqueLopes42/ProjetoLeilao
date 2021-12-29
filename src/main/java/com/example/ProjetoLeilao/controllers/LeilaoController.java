@@ -13,6 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping("leilao")
 @CrossOrigin
+<<<<<<< HEAD
+
+=======
+>>>>>>> 22c17498cadafcadd63333b6039324312ee7a0c9
 public class LeilaoController {
 
     @Autowired

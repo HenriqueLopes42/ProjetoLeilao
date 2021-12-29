@@ -29,9 +29,9 @@ public class CompradorBiz {
         resultado =  tamanhoDoNomeValido(this.comprador.getNome()) && resultado;
         resultado = nomeIniciaMaiuscula(this.comprador.getNome()) && resultado;
         resultado = validarData(this.comprador.getDataNascimento()) && resultado;
-        resultado = validarTelefone((this.comprador.getTelefone())) && resultado;
+        resultado = validarTelefone(this.comprador.getTelefone()) && resultado;
         resultado = validarEmail(this.comprador.getEmail()) && resultado;
-        resultado = validAtivo(this.comprador.getAtivo()) && resultado;
+        resultado = validAtivoLeilao(this.comprador.getAtivo()) && resultado;
 
         return resultado;
     }
@@ -41,7 +41,7 @@ public class CompradorBiz {
         return isValid();
     }
 
-    public Boolean validAtivo(Boolean ativo){
+    public Boolean validAtivoLeilao(Boolean ativo){
         if (!ativo){
             erros.add("O leilao deve estar ativo");
             return false;
