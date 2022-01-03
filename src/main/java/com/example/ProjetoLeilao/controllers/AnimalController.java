@@ -80,7 +80,7 @@ public class AnimalController {
         AnimalBiz animalBiz = new AnimalBiz(animal,animalRepository, medicoRepository, compradorRepository, leilaoRepository, vendedorRepository,racaRepository);
 
 
-        if (animalBiz.isValid()) {
+        if (animalBiz.isValidToAlter()) {
             animalRepository.save(animal);
             animalRepository.flush();
             msg.setMensagem("Animal alterado com sucesso");
