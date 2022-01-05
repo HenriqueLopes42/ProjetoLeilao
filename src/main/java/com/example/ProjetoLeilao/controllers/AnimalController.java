@@ -77,7 +77,13 @@ public class AnimalController {
         Mensagem msg = new Mensagem();
 
 
-        AnimalBiz animalBiz = new AnimalBiz(animal,animalRepository, medicoRepository, compradorRepository, leilaoRepository, vendedorRepository,racaRepository);
+        AnimalBiz animalBiz = new AnimalBiz(animal,
+                animalRepository,
+                medicoRepository,
+                compradorRepository,
+                leilaoRepository,
+                vendedorRepository,
+                racaRepository);
 
 
         if (animalBiz.isValidToAlter()) {
