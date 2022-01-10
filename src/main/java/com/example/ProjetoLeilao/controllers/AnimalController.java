@@ -76,9 +76,7 @@ public class AnimalController {
     public Mensagem alterar(@RequestBody Animal animal){
         Mensagem msg = new Mensagem();
 
-
         AnimalBiz animalBiz = new AnimalBiz(animal,animalRepository, medicoRepository, compradorRepository, leilaoRepository, vendedorRepository,racaRepository);
-
 
         if (animalBiz.isValidToAlter()) {
             animalRepository.save(animal);
@@ -88,7 +86,6 @@ public class AnimalController {
             msg.setErros(animalBiz.getErros());
             msg.setMensagem("Erro ao alterar animal: ");
         }
-
 
         return msg;
 
