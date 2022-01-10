@@ -12,10 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping ("comprador")
 @CrossOrigin
-<<<<<<< HEAD
-
-=======
->>>>>>> 90f24612c73804d011d3fe461d2cfc9770f35010
 public class CompradorController {
 
     @Autowired

@@ -33,7 +33,7 @@ public class Comprador {
     private String telefone;
 
     @Column(name = "email",nullable = false, length = 100)
-    @Pattern(regexp = "^([0-9A-Za-z]+)(@{1})([A-Za-z]+)(.)([A-Za-z]{2,3})$", message = "O e-mail deve ser válido")
+    @Pattern(regexp = "^[A-z0-9_]{1,20}@[A-z]{1,15}\\.([A-z]{1,10}|[A-z]{1,10}\\.[A-z]{1,5})$", message = "Email invalido.")
     private String email;
 
     @Column(name = "id_leilao",nullable = false, length = 10)
