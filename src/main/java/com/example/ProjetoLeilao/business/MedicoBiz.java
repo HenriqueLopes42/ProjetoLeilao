@@ -47,10 +47,21 @@ public class MedicoBiz {
         Boolean resultado;
         resultado = nomeUnico(medico.getNome());
         resultado = tamanhoNomeValido(medico.getNome()) && resultado;
-        resultado = nomeIniciaMaiuscula(medico.getNome()) && resultado;
-        resultado = validaDataNascimento(medico.getDataNascimento()) && resultado;
-        resultado = validaTelefone(medico.getTelefone()) && resultado;
-        resultado = validaEmail(medico.getEmail()) && resultado;
+        //resultado = nomeIniciaMaiuscula(medico.getNome()) && resultado;
+        //resultado = validaDataNascimento(medico.getDataNascimento()) && resultado;
+        //resultado = validaTelefone(medico.getTelefone()) && resultado;
+        //resultado = validaEmail(medico.getEmail()) && resultado;
+        resultado = validaCrmv(medico.getCrmv()) && resultado;
+        return resultado;
+    }
+
+    public Boolean isValidToAlter() {
+        Boolean resultado;
+        resultado = tamanhoNomeValido(medico.getNome());
+        //resultado = nomeIniciaMaiuscula(medico.getNome()) && resultado;
+        //resultado = validaDataNascimento(medico.getDataNascimento()) && resultado;
+        //resultado = validaTelefone(medico.getTelefone()) && resultado;
+        //resultado = validaEmail(medico.getEmail()) && resultado;
         resultado = validaCrmv(medico.getCrmv()) && resultado;
         return resultado;
     }
