@@ -1,7 +1,9 @@
 package com.example.ProjetoLeilao.controllers;
 
 import com.example.ProjetoLeilao.Mensagem;
+import com.example.ProjetoLeilao.business.AnimalBiz;
 import com.example.ProjetoLeilao.business.RacaBiz;
+import com.example.ProjetoLeilao.entities.Animal;
 import com.example.ProjetoLeilao.entities.Raca;
 import com.example.ProjetoLeilao.repositories.RacaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +47,23 @@ public class RacaController {
         return msg;
     }
 
-    @PutMapping
-    public Raca alterar (@RequestBody Raca raca){
-        racaRepository.save(raca);
-        racaRepository.flush();
-        return raca;
+    @PutMapping()
+    public Mensagem alterar(@RequestBody Raca raca){
+        Mensagem msg = new Mensagem();
+
+
+        RacaBiz racaBiz = new RacaBiz(raca,racaRepository);
+
+
+        if (racaBiz.isValid()) {
+            racaRepository.save(raca);
+            racaRepository.flush();
+            msg.setMensagem("Raça alterada com sucesso");
+        } else {
+            msg.setErros(racaBiz.getErros());
+            msg.setMensagem("Erro ao alterar raça: ");
+        }
+        return msg;
     }
 
     @DeleteMapping

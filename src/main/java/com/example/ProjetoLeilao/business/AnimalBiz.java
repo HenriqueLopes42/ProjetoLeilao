@@ -67,6 +67,34 @@ public class AnimalBiz {
 
         return resultado;
     }
+    // validação para alterar
+    public Boolean isValidToAlter(){
+        Boolean resultado;
+        resultado = nomeValido(animal.getNome()) ;
+        resultado = precoValido(animal.getPreco()) && resultado;
+
+        resultado = medicoExistente(animal.getIdMedico()) && resultado;
+        resultado = medicoAtivo(animal.getIdMedico()) && resultado;
+
+        resultado = compradorExistente(animal.getIdComprador()) && resultado;
+        resultado = compradorAtivo(animal.getIdComprador()) && resultado;
+
+        resultado = vendedorExistente(animal.getIdVendedor()) && resultado;
+        resultado = vendedorAtivo(animal.getIdVendedor()) && resultado;
+
+        resultado = leilaoExistente(animal.getIdLeilao()) && resultado;
+        resultado = leilaoAtivo(animal.getIdLeilao()) && resultado;
+
+        resultado = racaExistente(animal.getIdRaca()) && resultado;
+        resultado = racaAtivo(animal.getIdRaca()) && resultado;
+
+        resultado = verificarIdade(animal.getIdade()) && resultado;
+        resultado = PesoValido(animal.getPesoArroba()) && resultado;
+
+
+
+        return resultado;
+    }
 
     public Boolean nomeUnico(String nome){
         Integer quantidade = animalRepository.findByNome(nome).size();

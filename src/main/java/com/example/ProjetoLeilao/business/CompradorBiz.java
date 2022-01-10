@@ -43,6 +43,8 @@ public class CompradorBiz {
         resultado = validarTelefone((this.comprador.getTelefone())) && resultado;
         resultado = validaEmail(this.comprador.getEmail()) && resultado;
         resultado = validAtivo(this.comprador.getAtivo()) && resultado;
+        resultado = validarTelefone(this.comprador.getTelefone()) && resultado;
+
 
         return resultado;
     }
