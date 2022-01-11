@@ -7,6 +7,7 @@ import com.example.ProjetoLeilao.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,8 @@ public class AnimalController {
 
     @GetMapping()
     public List<Animal> listar(){
-        List<Animal> lista = animalRepository.findByAtivo(true);
+
+       List<Animal> lista = animalRepository.findByAtivo(true);
         return lista;
     }
 
@@ -41,7 +43,6 @@ public class AnimalController {
         Animal animal = animalRepository.findById(id).get();
         return  animal;
     }
-
 
     @PostMapping()
     public Mensagem incluir(@RequestBody Animal animal){
