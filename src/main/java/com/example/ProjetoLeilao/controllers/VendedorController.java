@@ -31,7 +31,7 @@ public class VendedorController {
 
     @PostMapping
     public Mensagem incluir(@RequestBody Vendedor vendedor) {
-        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor.getIdVendedor(), vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
 
         if(vendedorBiz.isValid()) {
@@ -42,7 +42,7 @@ public class VendedorController {
             msg.setMensagem("Registro inserido.");
         } else {
             msg.setErros(vendedorBiz.getErros());
-            msg.setMensagem("Erro ao incluir funciario: ");
+            msg.setMensagem("Erro ao incluir Vendedor: ");
         }
 
         return msg;
@@ -50,7 +50,7 @@ public class VendedorController {
 
     @PutMapping
     public Mensagem alterar(@RequestBody Vendedor vendedor) {
-        VendedorBiz vendedorBiz = new VendedorBiz(vendedor, vendedorRepository);
+        VendedorBiz vendedorBiz = new VendedorBiz(vendedor.getIdVendedor(), vendedor, vendedorRepository);
         Mensagem msg = new Mensagem();
         if (vendedorBiz.isValid()) {
             vendedorRepository.save(vendedor);

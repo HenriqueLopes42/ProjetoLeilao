@@ -8,13 +8,28 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class VendedorBiz {
 
     VendedorRepository vendedorRepository;
     private Vendedor vendedor;
     private List<String> erros;
 
-    public VendedorBiz(Vendedor vendedor, VendedorRepository vendedorRepository) {
+    private boolean alterando;
+
+    private boolean incluindo;
+
+
+    public VendedorBiz(int id, Vendedor vendedor, VendedorRepository vendedorRepository) {
+
+        if (id ==0){
+            incluindo = true;
+            alterando = false;
+        } else {
+            incluindo = false;
+            alterando = true;
+        }
+
         this.vendedorRepository = vendedorRepository;
         this.vendedor = vendedor;
         this.erros = new ArrayList<>();
@@ -37,11 +52,15 @@ public class VendedorBiz {
     }
 
     public Boolean isValid() {
-        Boolean resultado;
-        resultado = nomeUnico(vendedor.getNome());
+        Boolean resultado = true;
+
+        if (incluindo) {
+            resultado = nomeUnico(vendedor.getNome());
+        }
+
         resultado = tamanhoNomeValido(vendedor.getNome()) && resultado;
-        resultado = nomeIniciaMaiuscula(vendedor.getNome()) && resultado;
-        resultado = validaDataNascimento(vendedor.getDataNascimento()) && resultado;
+     //   resultado = nomeIniciaMaiuscula(vendedor.getNome()) && resultado;
+     //   resultado = validaDataNascimento(vendedor.getDataNascimento()) && resultado;
         resultado = validaTelefone(vendedor.getTelefone()) && resultado;
         resultado = validaEmail(vendedor.getEmail()) && resultado;
         return resultado;
@@ -70,7 +89,7 @@ public class VendedorBiz {
 
     public Boolean nomeIniciaMaiuscula( String nome ){
 
-        Boolean certo = nome.matches("^[A-Z]]");
+        Boolean certo = nome.matches("^[A-Z]{1}[A-z]{49}]");
         if (!certo){
             erros.add("O nome deve iniciar com letra maiuscula");
         }
@@ -83,7 +102,7 @@ public class VendedorBiz {
         Format formatter = new SimpleDateFormat("yyyy-MM-dd");
         String s = formatter.format(data);
         System.out.println(s);
-        Boolean certo = s.matches("^[0-2][0-9]{3}/[0-1][0-9]/[0-3][0-9]");
+        Boolean certo = s.matches("^[0-3][0-9]/[0-1][0-9]/[0-9]{2}$");
         if (!certo)
             erros.add("A data de nascimento inserida é inválida.");
         return certo;
