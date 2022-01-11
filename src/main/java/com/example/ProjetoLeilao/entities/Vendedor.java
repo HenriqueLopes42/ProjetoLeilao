@@ -20,7 +20,7 @@ public class Vendedor {
     @Pattern(regexp = "^[A-Z][a-z]{9,49}$", message = "O nome deve ter entre 10 e 50 caracteres")
     private String nome;
 
-    @Column(name = "cpf", nullable = false, length = 11)
+    @Column(name = "cpf", nullable = false, length = 15)
     @Pattern(regexp = "^[0-9]{3}(\\.\\d*[0-9]{3})(\\.\\d*[0-9]{3})-[0-9]{2}$", message = "CPF inválido")
     private String cpf;
 
