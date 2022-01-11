@@ -13,11 +13,6 @@ import java.util.List;
 @RequestMapping ("comprador")
 @CrossOrigin
 
-
-
-
-
-
 public class CompradorController {
 
     @Autowired
@@ -36,7 +31,6 @@ public class CompradorController {
 
         Comprador busca = compradorRepository.findById(id).get();
         return busca;
-
     }
 
     @PostMapping
@@ -54,12 +48,6 @@ public class CompradorController {
             msg.setErros(compradorBiz.getErros());
             msg.setMensagem("Erro ao incluir Comprador: ");
         }
-
-        comprador.setIdComprador(0);
-        comprador.setAtivo(true);
-        compradorRepository.save(comprador);
-        compradorRepository.flush();
-        msg.setMensagem("Registro inserido.");
         return msg;
     }
 
@@ -95,7 +83,4 @@ public class CompradorController {
         msg.setMensagem("Registro excluido.");
         return msg;
     }
-
-
-
 }

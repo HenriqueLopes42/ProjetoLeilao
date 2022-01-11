@@ -16,22 +16,35 @@ public class CompradorBiz {
     public Leilao leilao;
     private Comprador comprador;
     private List<String> erros;
+    private boolean incluindo;
 
     public CompradorBiz(Comprador c, CompradorRepository compradorRepository){
+
+        if (c.getIdComprador() == 0 ){
+            this.incluindo = true;
+        } else {
+            this.incluindo = false;
+        }
+
         erros = new ArrayList<>();
         this.comprador = c;
         this.compradorRepository = compradorRepository;
     }
 
     public Boolean isValid(){
-        Boolean resultado;
-        resultado = nomeUnico(this.comprador.getNome());
-        resultado =  tamanhoDoNomeValido(this.comprador.getNome()) && resultado;
-        resultado = nomeIniciaMaiuscula(this.comprador.getNome()) && resultado;
+        Boolean resultado = true;
+
+
+        if (this.incluindo) {
+            resultado = nomeUnico(this.comprador.getNome());
+        }
+        resultado = nomeValido(this.comprador.getNome()) && resultado;
         resultado = validarData(this.comprador.getDataNascimento()) && resultado;
+        resultado = validarTelefone((this.comprador.getTelefone())) && resultado;
+        resultado = validaEmail(this.comprador.getEmail()) && resultado;
+        resultado = validAtivo(this.comprador.getAtivo()) && resultado;
         resultado = validarTelefone(this.comprador.getTelefone()) && resultado;
-        resultado = validarEmail(this.comprador.getEmail()) && resultado;
-        resultado = validAtivoLeilao(this.comprador.getAtivo()) && resultado;
+
 
         return resultado;
     }
@@ -41,7 +54,7 @@ public class CompradorBiz {
         return isValid();
     }
 
-    public Boolean validAtivoLeilao(Boolean ativo){
+    public Boolean validAtivo(Boolean ativo){
         if (!ativo){
             erros.add("O leilao deve estar ativo");
             return false;
@@ -50,39 +63,26 @@ public class CompradorBiz {
         }
     }
 
-    // validar para que nao tenha um nome repetido
     public Boolean nomeUnico(String nome){
-
         Integer quantidade = compradorRepository.findByNome(nome).size();
-        if (quantidade == 0) {
+        if(quantidade == 0){
             return true;
-        } else {
-            erros.add("O Nome já existe no sistema.");
+        }else{
+            erros.add("O nome ja existe");
             return false;
         }
     }
 
-    // tamanho do nome deve ser maiaor que 10
-    public Boolean tamanhoDoNomeValido( String nome){
-        Integer tamanho = nome.length();
-        if (tamanho >= 10 ){
+    public Boolean nomeValido(String nome){
+        Integer numeroDeLetras = nome.length();
+        if(numeroDeLetras >=10 && numeroDeLetras <= 50){
             return true;
-        } else {
-            erros.add("O tamanho do nome deve ser ter 10 ou mais caracteres");
+        }else{
+            erros.add("O nome deve conter um minimo de 10 digitos e um maximo de 50 digitos.");
             return false;
         }
     }
 
-    // o nome deve iniciar com letra maiuscula
-    public Boolean nomeIniciaMaiuscula( String nome ){
-
-        Boolean certo = nome.matches("^[A-Z]]");
-        if (!certo){
-            erros.add("O nome deve iniciar com maiuscula");
-        }
-        return certo;
-
-    }
     public Boolean validarData( Date data ){
 
         Date date = new Date();
@@ -106,15 +106,11 @@ public class CompradorBiz {
         }
     }
 
-    public Boolean validarEmail ( String email) {
-
-        if (email == null || email.matches("^([0-9A-Za-z]+)(@{1})([A-Za-z]+)(.)([A-Za-z]{2,3})$")) {
-            return true;
-
-        } else {
-            erros.add("Email invalido: ");
-            return false;
-        }
+    public Boolean validaEmail(String email) {
+        Boolean certo = email.matches("^([0-9A-Za-z]+)(@)([A-Za-z]+)(\\.)([A-Za-z]{2,3})");
+        if (!certo)
+            erros.add("O endereco de email não segue o padrão");
+        return certo;
     }
 
 
