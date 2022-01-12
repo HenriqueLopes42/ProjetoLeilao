@@ -20,7 +20,7 @@ public class CompradorControllerTests {
     private CompradorController compradorController;
 
     @Test
-    public void listarTeste(){
+    public void listarTest(){
         Boolean expected = true;
         Boolean result = false;
 
@@ -39,7 +39,7 @@ public class CompradorControllerTests {
     }
 
     @Test
-    public void IncluirTeste(){
+    public void IncluirTest(){
         Boolean expected = true;
         Boolean result = false;
 

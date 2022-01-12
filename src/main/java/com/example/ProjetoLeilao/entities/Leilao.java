@@ -31,7 +31,6 @@ public class Leilao {
     @Column(name = "ativo")
     private Boolean ativo;
 
-
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 

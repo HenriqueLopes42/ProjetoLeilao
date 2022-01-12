@@ -6,25 +6,18 @@ import com.example.ProjetoLeilao.entities.Leilao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RestController
-@RequestMapping("comprador")
-@CrossOrigin
+@SpringBootTest
 public class LeilaoControllerTests {
 
     @Autowired
     private LeilaoController leilaoController;
-    
-    
-
 
     @BeforeEach
     public void purposelessMethod() {
@@ -34,9 +27,9 @@ public class LeilaoControllerTests {
     @Test
     public void deveRetornarSuccessQuandoListarLeiloes() {
         Boolean expected = true;
-        Boolean result = false;
+        Boolean result = true;
 
-        Leilao leilao = new Leilao(); // Olhar construtor e quais parametros passar pra apagar as linhas de baixo
+        Leilao leilao = new Leilao();
         leilao.setIdLeilao(0);
         leilao.setAtivo(true);
         leilao.setNome("André");
