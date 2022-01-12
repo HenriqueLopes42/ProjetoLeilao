@@ -75,7 +75,127 @@ public class AnimalControllerTests {
         assertThat(result).isEqualTo(expected);
     }
 
+    @Test
+    public void buscarTest(){
 
+        Boolean expected = true;
+        Boolean result = false;
+
+        try {
+            Animal animal = animalController.buscar(1);
+            if (animal.getIdAnimal() != null) {
+                result = true;
+            } else {
+                result = false;
+                System.out.println("Animal - BuscarTest: Animal não encontrado!");
+            }
+        }catch ( Exception ex){
+            result = false;
+            System.out.println(ex.getMessage());
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void alterarTest(){
+
+        Boolean expected = true;
+        Boolean result = false;
+
+        try {
+            Animal animal = this.animalController.buscar(2);
+            animal.setNome("Animalzinho alterado");
+            animal.setIdMedico(4);
+            animal.setIdRaca(14);
+            Mensagem msg = this.animalController.alterar(animal);
+
+            Animal animalAlterado = this.animalController.buscar(2);
+            if (animal.getNome().equals(animalAlterado.getNome())) {
+                result = true;
+            } else {
+                result = false;
+                System.out.println("animal - AlterarTest: o nome nao foi alterado");
+                System.out.println(animal.getNome());
+                System.out.println(animalAlterado.getNome());
+
+                for(String erro: msg.getErros()){
+                    System.out.println(erro);
+                }
+            }
+
+        } catch (Exception ex){
+            result = false;
+            System.out.println("animal - AlterarTest: "+ex.getMessage());
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void deletarTest(){
+
+        Boolean expected = true;
+        Boolean result = false;
+        try{
+
+            Animal animal = this.animalController.buscar(2);
+            animal.setAtivo(true);
+            this.animalController.alterar(animal);
+
+            Integer id = animal.getIdAnimal();
+            this.animalController.deletar(id);
+
+            animal = this.animalController.buscar(2);
+
+            if (animal.getAtivo() == false){
+                result = true;
+            } else {
+                result = false;
+                System.out.println("Animal deletar: nao foi possivel deletar o animal" );
+            }
+
+            animal.setAtivo(true);
+            this.animalController.alterar(animal);
+
+        } catch (Exception ex){
+            result = false;
+            System.out.println("Animal deletar:" + ex.getMessage());
+
+        }
+
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void deletarTestByAnimal(){
+        Boolean expected = true;
+        Boolean result = false;
+        try{
+
+            Animal animal = this.animalController.buscar(2);
+            animal.setAtivo(true);
+            this.animalController.alterar(animal);
+
+            this.animalController.deletar(animal);
+
+            animal = this.animalController.buscar(2);
+
+            if (animal.getAtivo() == false){
+                result = true;
+            } else {
+                result = false;
+                System.out.println("Animal deletar: nao foi possivel deletar o animal" );
+            }
+
+            animal.setAtivo(true);
+            this.animalController.alterar(animal);
+
+        } catch (Exception ex){
+            result = false;
+            System.out.println("Animal deletar:" + ex.getMessage());
+        }
+
+        assertThat(result).isEqualTo(expected);
+    }
 
 
 
