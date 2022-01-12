@@ -2,7 +2,6 @@ package com.example.ProjetoLeilao.ControllersTests;
 
 import com.example.ProjetoLeilao.Mensagem;
 import com.example.ProjetoLeilao.controllers.CompradorController;
-import com.example.ProjetoLeilao.entities.Animal;
 import com.example.ProjetoLeilao.entities.Comprador;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
