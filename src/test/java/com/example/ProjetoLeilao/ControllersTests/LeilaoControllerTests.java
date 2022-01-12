@@ -25,16 +25,9 @@ public class LeilaoControllerTests {
     }
 
     @Test
-    public void deveRetornarSuccessQuandoListarLeiloes() {
+    public void listarTest() {
         Boolean expected = true;
         Boolean result = true;
-
-        Leilao leilao = new Leilao();
-        leilao.setIdLeilao(0);
-        leilao.setAtivo(true);
-        leilao.setNome("André");
-        leilao.setData(new Date());
-        leilao.setDescricao("Descricao");
 
         try {
             List<Leilao> list = leilaoController.listar();
@@ -50,18 +43,18 @@ public class LeilaoControllerTests {
     }
 
     @Test
-    public void deveRetornarSuccessQuandoAdicionarLeilao(){
+    public void incluirTest(){
         Boolean expected = true;
         Boolean result = false;
 
-        Leilao leilao = new Leilao(); // Olhar construtor e quais parametros passar pra apagar as linhas de baixo
-        leilao.setIdLeilao(0);
-        leilao.setAtivo(true);
-        leilao.setNome("André");
-        leilao.setData(new Date());
-        leilao.setDescricao("Descricao");
+
 
         try {
+            Leilao leilao = new Leilao();
+            leilao = this.leilaoController.buscar(1);
+            leilao.setNome("Leilao de teste");
+            leilao.setAtivo(true);
+
             int quantidadeAnterior = this.leilaoController.listar().size();
 
             Mensagem msg = this.leilaoController.incluir(leilao);
@@ -84,21 +77,9 @@ public class LeilaoControllerTests {
         assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    public void deveRetornarFailedAoInserirDataInvalida() { // Criar essa função, existe um tratamento de exceção para esse caso ou não trata nesse tipo de teste?
-        Boolean expected = true;
-        Boolean result = false;
-
-        try {
-            result = true;
-        } catch (Exception ex) {
-            System.out.println("Erro ao editar o leilão: " + ex.getMessage());
-            result = false;
-        }
-    }
 
     @Test
-    public void DeveRetornarSuccessQuandoAlterarUmLeilao() {
+    public void alterarTest() {
         Boolean expected = true;
         Boolean result = false;
 
