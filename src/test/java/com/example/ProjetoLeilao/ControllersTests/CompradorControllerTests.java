@@ -2,6 +2,7 @@ package com.example.ProjetoLeilao.ControllersTests;
 
 import com.example.ProjetoLeilao.Mensagem;
 import com.example.ProjetoLeilao.controllers.CompradorController;
+import com.example.ProjetoLeilao.entities.Animal;
 import com.example.ProjetoLeilao.entities.Comprador;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,6 @@ public class CompradorControllerTests {
             System.out.println("Erro: " + exErro);
             result = false;
         }
-
-
         assertThat(result).isEqualTo(expected);
     }
 
@@ -68,13 +67,121 @@ public class CompradorControllerTests {
                     System.out.println(sErros);
                 }
             }
-
         }catch (Exception exErro){
             System.out.println("Erro ao tentar incluir comprador: : " + exErro.getMessage());
             result = false;
         }
-
-
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    public void buscarTest(){
+        Boolean expected = true;
+        Boolean result = false;
+
+        try{
+            Comprador comprador = this.compradorController.buscar(2);
+
+            if(comprador.getIdComprador() != null){
+                result = true;
+            }else{
+                result = false;
+                System.out.println("Comprador - Buscar: Não encontrou o comprador informado.");
+            }
+
+        }catch(Exception exErro){
+            result = false;
+            System.out.println(exErro.getMessage());
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void alterarTest(){
+        Boolean expected = true;
+        Boolean result = false;
+
+        try{
+            Comprador comprador = this.compradorController.buscar(2);
+            comprador.setNome("Novo nome comprador");
+
+            Mensagem msg = this.compradorController.alterar(comprador);
+            Comprador compradorAlterado = this.compradorController.buscar(2);
+
+            if(comprador.getNome().equals(compradorAlterado.getNome())){
+                result = true;
+            }else {
+                result = false;
+                System.out.println("Comprador - Alterar: Não foi alterado");
+                System.out.println("Antigo nome: " + comprador.getNome());
+                System.out.println("Novo nome: " + compradorAlterado.getNome());
+
+                for(String msgErro: msg.getErros()){
+                    System.out.println(msgErro);
+                }
+            }
+
+        }catch(Exception exErro){
+            result = false;
+            System.out.println(exErro.getMessage());
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void deletarTest(){
+        Boolean expected = true;
+        Boolean result = false;
+
+        try{
+            Comprador comprador = this.compradorController.buscar(2);
+
+            comprador.setAtivo(true);
+            this.compradorController.alterar(comprador);
+            Integer id = comprador.getIdComprador();
+            this.compradorController.deletar(id);
+            Comprador compradorDeletado = this.compradorController.buscar(2);
+
+            if(compradorDeletado.getAtivo() == false){
+                result = true;
+            }else {
+                result = false;
+                System.out.println("Comprador deletar: nao foi deletado." );
+            }
+        }catch(Exception exErro){
+            result = false;
+            System.out.println(exErro.getMessage());
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void deletarTestByComprador(){
+        Boolean expected = true;
+        Boolean result = false;
+
+        try{
+            Comprador comprador = this.compradorController.buscar(2);
+            comprador.setAtivo(true);
+            this.compradorController.alterar(comprador);
+            this.compradorController.deletar(comprador);
+
+            comprador = this.compradorController.buscar(2);
+
+            if(comprador.getAtivo() == false){
+                result = true;
+            }else {
+                result = false;
+                System.out.println("Comprador deletar: nao foi deletado." );
+            }
+        }catch(Exception exErro){
+            result = false;
+            System.out.println(exErro.getMessage());
+        }
+        assertThat(result).isEqualTo(expected);
+    }
+
+
+
+
 }

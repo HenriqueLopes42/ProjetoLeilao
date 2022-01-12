@@ -174,7 +174,6 @@ public class AnimalControllerTests {
             Animal animal = this.animalController.buscar(2);
             animal.setAtivo(true);
             this.animalController.alterar(animal);
-
             this.animalController.deletar(animal);
 
             animal = this.animalController.buscar(2);
