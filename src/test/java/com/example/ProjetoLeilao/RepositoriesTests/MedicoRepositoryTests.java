@@ -3,7 +3,9 @@ package com.example.ProjetoLeilao.RepositoriesTests;
 
 
 import com.example.ProjetoLeilao.controllers.MedicoController;
+import com.example.ProjetoLeilao.entities.Comprador;
 import com.example.ProjetoLeilao.entities.Medico;
+import com.example.ProjetoLeilao.repositories.MedicoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class MedicoRepositoryTests {
     @Autowired
     private MedicoController medicoController;
 
+    @Autowired
+    private MedicoRepository medicoRepository;
+
     @Test
     public void findByAtivoTest() {
 
@@ -24,25 +29,32 @@ public class MedicoRepositoryTests {
         Boolean result = false;
 
 
-        try {
-            Medico medico = new Medico();
-            List<Medico> lista = medicoController.listar();
-            System.out.println("Lista de Medicos Ativos");
+        try{
+            List<Medico> lista = medicoRepository.findByAtivo(true);
             result = true;
 
-
-        }catch(Exception ex){
-            System.out.println("Lista nao encontrada: " + ex.getMessage());
+        }catch (Exception exErro){
+            System.out.println("Erro: " + exErro);
             result = false;
-
         }
-
         assertThat(result).isEqualTo(expected);
     }
 
     @Test
     public void findByIdMedicoTest(){
+        Boolean expected = true;
+        Boolean result = false;
 
+        try{
+            List<Medico> medico = medicoRepository.findByIdMedico(4);
+            System.out.println("Lista de Ids Medicos: ");
+            result = true;
+
+        }catch (Exception ex){
+            System.out.println("Erro: " + ex);
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
     }
 
 
