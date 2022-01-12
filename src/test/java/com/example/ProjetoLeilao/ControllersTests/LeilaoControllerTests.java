@@ -77,12 +77,16 @@ public class LeilaoControllerTests {
     }
 
     @Test
-    public void testeDeAlterar() {
-        
+    public void DeveRetornarSuccessQuandoAlterarUmLeilao() {
+        Boolean expected = true;
+        Boolean result = false;
+
         try {
-            
+             Mensagem msg = this.leilaoController.alterar(leilao);
+             result = true;
+        } catch ( Exception ex ) {
+            System.out.println("Erro ao incluir o leilão: " + ex.getMessage());
         }
-            
         Assertions.assertEquals()
     }
 }
