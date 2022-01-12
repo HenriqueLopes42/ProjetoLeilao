@@ -177,14 +177,7 @@ public class AnimalControllerTests {
             this.animalController.deletar(animal);
 
             animal = this.animalController.buscar(2);
-
-            if (animal.getAtivo() == false){
-                result = true;
-            } else {
-                result = false;
-                System.out.println("Animal deletar: nao foi possivel deletar o animal" );
-            }
-
+            result = animal.getAtivo() ? false : true;
             animal.setAtivo(true);
             this.animalController.alterar(animal);
 
