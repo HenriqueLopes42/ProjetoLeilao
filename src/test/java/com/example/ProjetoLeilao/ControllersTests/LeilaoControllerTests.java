@@ -63,17 +63,30 @@ public class LeilaoControllerTests {
                 result = true;
             else {
                 System.out.println("Nao foi possível incluir o leilão: " + msg.getMensagem());
-                // result = false;
+                result = false;
                 for( String s: msg.getErros()){
                     System.out.println(s);
                 }
             }
         } catch ( Exception ex ){
             System.out.println("Erro ao incluir o leilão: " + ex.getMessage());
-            // result = false;
+            result = false;
         }
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    public void deveRetornarFailedAoInserirDataInvalida() { // Criar essa função, existe um tratamento de exceção para esse caso ou não trata nesse tipo de teste?
+        Boolean expected = true;
+        Boolean result = false;
+
+        try {
+            result = true;
+        } catch (Exception ex) {
+            System.out.println("Erro ao editar o leilão: " + ex.getMessage());
+            result = false;
+        }
     }
 
     @Test
@@ -85,8 +98,9 @@ public class LeilaoControllerTests {
              Mensagem msg = this.leilaoController.alterar(leilao);
              result = true;
         } catch ( Exception ex ) {
-            System.out.println("Erro ao incluir o leilão: " + ex.getMessage());
+            System.out.println("Erro ao alterar o leilão: " + ex.getMessage());
+            result = false;
         }
-        Assertions.assertEquals()
+        Assertions.assertEquals();
     }
 }
