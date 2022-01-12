@@ -76,11 +76,13 @@ public class RacaController {
     }
 
     @DeleteMapping("/{id}")
-    public Raca deletar(@PathVariable Integer id){
+    public Mensagem deletar(@PathVariable Integer id){
+        Mensagem msg = new Mensagem();
         Raca excluir = racaRepository.findById(id).get();
         excluir.setAtivo(false);
         racaRepository.save(excluir);
         racaRepository.flush();
-        return excluir;
+        msg.setMensagem("Raça deletada com sucesso");
+        return msg;
     }
 }

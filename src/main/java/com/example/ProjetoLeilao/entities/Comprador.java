@@ -38,7 +38,7 @@ public class Comprador {
 
     @Column(name = "id_leilao",nullable = false, length = 10)
     @Pattern(regexp = "^[0-9]{10}$", message = "O código deve ser um número inteiro")
-    private String idLeilao;
+    private Integer idLeilao;
 
     @Column(name = "ativo")
     private Boolean ativo;
@@ -91,11 +91,11 @@ public class Comprador {
         this.email = email;
     }
 
-    public String getIdLeilao() {
+    public Integer getIdLeilao() {
         return idLeilao;
     }
 
-    public void setIdLeilao(String idLeilao) {
+    public void setIdLeilao(Integer idLeilao) {
         this.idLeilao = idLeilao;
     }
 

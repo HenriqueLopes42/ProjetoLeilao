@@ -1,6 +1,5 @@
 package com.example.ProjetoLeilao.controllers;
 
-
 import com.example.ProjetoLeilao.Mensagem;
 import com.example.ProjetoLeilao.business.LeilaoBiz;
 import com.example.ProjetoLeilao.entities.Leilao;
@@ -13,9 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("leilao")
 @CrossOrigin
-
-
-
 public class LeilaoController {
 
     @Autowired
@@ -43,6 +39,7 @@ public class LeilaoController {
             leilaoRepository.save(leilao);
             leilaoRepository.flush();
             msg.setMensagem("Leilão Incluido com sucesso!");
+
         } else{
             msg.setErros(leilaoBiz.getErros());
 
@@ -74,11 +71,4 @@ public class LeilaoController {
         leilaoRepository.flush();
         return excluir;
     }
-
-
-
-
-
-
-
 }
