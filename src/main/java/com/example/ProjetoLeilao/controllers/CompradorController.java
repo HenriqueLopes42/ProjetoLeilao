@@ -67,6 +67,8 @@ public class CompradorController {
     public Mensagem deletar(@RequestBody Comprador comprador) {
         Comprador excluir = compradorRepository.findById(comprador.getIdComprador()).get();
         excluir.setAtivo(false);
+        compradorRepository.save(excluir);
+        compradorRepository.flush();
         Mensagem msg = new Mensagem();
         msg.setMensagem("Registro excluido.");
         return msg;
