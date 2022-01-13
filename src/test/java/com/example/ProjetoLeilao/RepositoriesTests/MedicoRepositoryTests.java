@@ -5,6 +5,7 @@ package com.example.ProjetoLeilao.RepositoriesTests;
 import com.example.ProjetoLeilao.controllers.MedicoController;
 import com.example.ProjetoLeilao.entities.Comprador;
 import com.example.ProjetoLeilao.entities.Medico;
+import com.example.ProjetoLeilao.entities.Raca;
 import com.example.ProjetoLeilao.repositories.MedicoRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -60,7 +61,18 @@ public class MedicoRepositoryTests {
 
     @Test
     public void findByNomeTest() {
+        Boolean expected = true;
+        Boolean result = false;
 
+        try {
+            Medico medico = this.medicoController.buscar(8);
+            List<Medico> medicos = medicoRepository.findByNome(medico.getNome());
+            result = (medico.getNome().equals(medicos.get(0).getNome())) ? true : false;
+        } catch (Exception ex){
+            System.out.println("Erro: " + ex);
+            result = false;
+        }
+        assertThat(result).isEqualTo(expected);
 
 
     }
