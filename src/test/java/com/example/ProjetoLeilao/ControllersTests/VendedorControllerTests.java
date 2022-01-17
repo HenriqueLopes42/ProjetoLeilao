@@ -99,15 +99,11 @@ public class VendedorControllerTests {
         Boolean result = false;
 
         try {
-            Vendedor vendedor = this.vendedorController.buscar(1);
-            vendedor.setNome("Vendedor alterado");
-            vendedor.setEmail("Email alterado");
-            vendedor.setCpf("CPF alterado");
-            vendedor.setDataNascimento(new Date());
-            vendedor.setTelefone("Telefone alterado");
+            Vendedor vendedor = this.vendedorController.buscar(2);
+            vendedor.setNome("Vendedor alterado" + (int)(Math.random() * 100));
             Mensagem msg = this.vendedorController.alterar(vendedor);
 
-            Vendedor vendedorAlterado = this.vendedorController.buscar(1);
+            Vendedor vendedorAlterado = this.vendedorController.buscar(2);
             if (vendedor.getNome().equals(vendedorAlterado.getNome())) {
                 result = true;
             } else {
@@ -134,7 +130,7 @@ public class VendedorControllerTests {
         Boolean result = false;
         try {
 
-            Vendedor vendedor = this.vendedorController.buscar(1);
+            Vendedor vendedor = this.vendedorController.buscar(2);
             vendedor.setAtivo(true);
             this.vendedorController.alterar(vendedor);
 
