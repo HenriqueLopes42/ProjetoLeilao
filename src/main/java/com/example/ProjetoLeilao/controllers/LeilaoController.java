@@ -42,33 +42,39 @@ public class LeilaoController {
 
         } else{
             msg.setErros(leilaoBiz.getErros());
-
+            msg.setMensagem("Erro ao incluir leilão");
         }
         return msg;
     }
 
     @PutMapping
-    public Leilao alterar (@RequestBody Leilao leilao){
+    public Mensagem alterar (@RequestBody Leilao leilao){
+        Mensagem msg = new Mensagem();
         leilaoRepository.save(leilao);
         leilaoRepository.flush();
-        return leilao;
+        msg.setMensagem("Leilao alterado.");
+        return msg;
     }
 
     @DeleteMapping
-    public Leilao deletar(@RequestBody Leilao leilao){
+    public Mensagem deletar(@RequestBody Leilao leilao){
         Leilao excluir = leilaoRepository.findById(leilao.getIdLeilao()).get();
+        Mensagem msg = new Mensagem();
         excluir.setAtivo(false);
         leilaoRepository.save(excluir);
         leilaoRepository.flush();
-        return excluir;
+        msg.setMensagem("Leilão excluido com sucesso");
+        return msg;
     }
 
     @DeleteMapping("{id}")
-    public Leilao deletar (@PathVariable Integer id){
+    public Mensagem deletar (@PathVariable Integer id){
         Leilao excluir = leilaoRepository.findById(id).get();
+        Mensagem msg = new Mensagem();
         excluir.setAtivo(false);
         leilaoRepository.save(excluir);
         leilaoRepository.flush();
-        return excluir;
+        msg.setMensagem("Animal excluido com sucesso");
+        return msg;
     }
 }

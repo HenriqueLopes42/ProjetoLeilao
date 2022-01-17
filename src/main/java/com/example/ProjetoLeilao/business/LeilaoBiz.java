@@ -32,7 +32,7 @@ public class LeilaoBiz {
         return resultado;
     }
 
-    public Boolean nomeEventoUnico (String nome){ // procura para ver se nao existe outro evento já registrado com o mesmo nome
+    public Boolean nomeEventoUnico (String nome){ // procura se nao existe outro evento já registrado com o mesmo nome
         Integer quantidade = leilaoRepository.findByNome(nome).size();
         if(quantidade == 0 ){
             return true;
