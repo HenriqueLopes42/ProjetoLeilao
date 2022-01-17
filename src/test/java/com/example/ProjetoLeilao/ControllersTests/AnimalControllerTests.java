@@ -50,10 +50,10 @@ public class AnimalControllerTests {
             animal.setIdade(4);
             animal.setIdComprador(1);
             animal.setIdLeilao(1);
-            animal.setIdMedico(4);
+            animal.setIdMedico(2);
             animal.setIdRaca(14);
-            animal.setIdVendedor(1);
-            animal.setNome("Boi tatatuado" + (quantidadeAnterior +1000000));
+            animal.setIdVendedor(2);
+            animal.setNome("Boi tatatuado" + (quantidadeAnterior + (int)(Math.random() * 100)));
             animal.setPesoArroba(150.0f);
             animal.setPreco(1200.0f);
             animal.setRegistro("448877");
