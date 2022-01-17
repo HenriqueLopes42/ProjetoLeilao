@@ -134,8 +134,8 @@ public class VendedorControllerTests {
             vendedor.setAtivo(true);
             this.vendedorController.alterar(vendedor);
 
-            Integer id = vendedor.getIdVendedor();
-            this.vendedorController.deletar(id);
+            Integer idAExcluir = vendedor.getIdVendedor();
+            this.vendedorController.deletar(idAExcluir);
 
             vendedor = this.vendedorController.buscar(2);
 
@@ -153,11 +153,12 @@ public class VendedorControllerTests {
         }
         assertThat(result).isEqualTo(expected);
     }
+
     @Test
     public void deletarTestByVendedor(){
         Boolean expected = true;
         Boolean result = false;
-        try{
+        try {
             Vendedor vendedor = this.vendedorController.buscar(2);
             vendedor.setAtivo(true);
             this.vendedorController.alterar(vendedor);
@@ -166,15 +167,15 @@ public class VendedorControllerTests {
 
             vendedor = this.vendedorController.buscar(2);
 
-            if (vendedor.getAtivo() == false){
+            if (vendedor.getAtivo() == false) {
                 result = true;
             } else {
                 result = false;
-                System.out.println("Vendedor deletar: nao foi possivel deletar o vendedor" );
+                System.out.println("Vendedor deletar: nao foi possivel deletar o vendedor");
             }
             vendedor.setAtivo(true);
             this.vendedorController.alterar(vendedor);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             result = false;
             System.out.println("Vendedor deletar:" + ex.getMessage());
         }

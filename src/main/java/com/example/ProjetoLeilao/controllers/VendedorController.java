@@ -64,11 +64,13 @@ public class VendedorController {
     }
 
     @DeleteMapping
-    public Mensagem deletar(@RequestBody Vendedor medico) {
-        Vendedor excluir = vendedorRepository.findById(medico.getIdVendedor()).get();
+    public Mensagem deletar(@RequestBody Vendedor vendedor) {
+        Vendedor excluir = vendedorRepository.findById(vendedor.getIdVendedor()).get();
         excluir.setAtivo(false);
         Mensagem msg = new Mensagem();
         msg.setMensagem("Registro excluido.");
+        vendedorRepository.save(excluir);
+        vendedorRepository.flush();
         return msg;
     }
 
