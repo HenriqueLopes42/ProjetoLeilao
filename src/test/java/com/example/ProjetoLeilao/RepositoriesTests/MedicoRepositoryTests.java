@@ -65,9 +65,11 @@ public class MedicoRepositoryTests {
         Boolean result = false;
 
         try {
-            Medico medico = this.medicoController.buscar(8);
-            List<Medico> medicos = medicoRepository.findByNome(medico.getNome());
-            result = (medico.getNome().equals(medicos.get(0).getNome())) ? true : false;
+            Medico medico = this.medicoController.buscar(15);
+            List<Medico> medicoByName = medicoRepository.findByNome(medico.getNome());
+            result = medico.getNome().equals(medicoByName.get(0).getNome()) ? true : false;
+            System.out.println(medico.getNome());
+            System.out.println(medicoByName.get(0).getNome());
         } catch (Exception ex){
             System.out.println("Erro: " + ex);
             result = false;
