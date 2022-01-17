@@ -54,7 +54,7 @@ public class MedicoControllerTests {
                 int qtdAnterior = this.medicoController.listar().size();
 
                 Medico medico = new Medico();
-                medico.setNome("Rodolfo Ferreirako" + (qtdAnterior +100000));
+                medico.setNome("Rodolfo Ferreirako" + (int)(Math.random() * 100));
                 medico.setIdMedico(3);
                 medico.setAtivo(true);
                 medico.setEmail("rodolfo@fer.com");
