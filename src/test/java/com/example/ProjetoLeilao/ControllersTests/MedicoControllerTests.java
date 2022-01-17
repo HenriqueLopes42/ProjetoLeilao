@@ -41,7 +41,6 @@ public class MedicoControllerTests {
             }
 
             assertThat(result).isEqualTo(expected);
-
         }
 
         @Test
@@ -82,7 +81,6 @@ public class MedicoControllerTests {
                 result = false;
             }
             assertThat(result).isEqualTo(expected);
-
         }
 
         @Test
