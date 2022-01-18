@@ -56,7 +56,7 @@ public class CompradorBiz {
 
     public Boolean validAtivo(Boolean ativo){
         if (!ativo){
-            erros.add("O leilao deve estar ativo");
+            erros.add("O comprador deve estar ativo");
             return false;
         }else {
             return true;
